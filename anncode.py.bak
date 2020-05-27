@@ -1,0 +1,173 @@
+#!/usr/bin/env python
+# coding: utf-8
+
+# In[1]:
+
+
+import pandas as pd
+
+
+# In[2]:
+
+
+dataset = pd.read_csv('Churn_Modelling.csv')
+
+
+# In[3]:
+
+
+dataset.head()
+
+
+# In[4]:
+
+
+import seaborn as sns
+sns.heatmap(dataset.isnull())
+
+
+# In[5]:
+
+
+sns.countplot(x=dataset['Geography'])
+
+
+# In[6]:
+
+
+dataset.columns
+
+
+# In[7]:
+
+
+y = dataset['Exited']
+
+
+# In[8]:
+
+
+X = dataset[['CreditScore', 'Age', 'Tenure', 'Balance', 'NumOfProducts', 'HasCrCard',
+       'IsActiveMember', 'EstimatedSalary']]
+
+
+# In[9]:
+
+
+Geography = pd.get_dummies(dataset['Geography'],drop_first=True)
+
+
+# In[10]:
+
+
+Gender = pd.get_dummies(dataset['Gender'],drop_first=True)
+
+
+# In[11]:
+
+
+X = pd.concat([X,Geography, Gender], axis=1)
+
+
+# In[12]:
+
+
+X.info()
+
+
+# In[13]:
+
+
+from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30, random_state=42)
+
+
+# In[14]:
+
+
+X_train
+
+
+# In[15]:
+
+
+from keras.optimizers import Adam
+
+
+# In[16]:
+
+
+from keras.models import Sequential
+
+
+# In[17]:
+
+
+from keras.layers import Dense
+
+
+# In[18]:
+
+
+model = Sequential()
+
+
+# In[19]:
+
+
+model.add(Dense(units=6, input_dim=11, activation='relu' ))
+
+
+# In[20]:
+
+
+model.add(Dense(units=6, activation='relu'))
+
+
+# In[21]:
+
+
+model.add(Dense(units=5, activation='relu'))
+
+
+# In[22]:
+
+
+model.add(Dense(units=1, activation='sigmoid'))
+
+
+# In[23]:
+
+
+model.compile(optimizer=Adam(learning_rate=0.0001), loss='binary_crossentropy', metrics=['accuracy'])
+
+
+# In[24]:
+
+
+model.fit(X_train, y_train, epochs=100)
+
+
+# In[25]:
+
+
+y_pred = model.predict(X_test)
+
+
+# In[36]:
+
+
+y_pred[100:200,:]
+
+
+# In[32]:
+
+
+y_test[30:40]
+
+
+# In[ ]:
+
+
+
+
