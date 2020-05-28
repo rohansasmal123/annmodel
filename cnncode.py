@@ -26,11 +26,11 @@ from keras.layers import Dense
 
 model = Sequential()
 
-model.add(Dense(units=6, input_dim=11, activation='relu' ))
+model.add(Dense(units=10, input_dim=11, activation='relu' ))
 
-model.add(Dense(units=6, activation='relu'))
+model.add(Dense(units=10, activation='relu'))
 
-model.add(Dense(units=5, activation='relu'))
+model.add(Dense(units=9, activation='relu'))
 
 model.add(Dense(units=1, activation='sigmoid'))
 
