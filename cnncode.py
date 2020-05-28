@@ -30,7 +30,7 @@ model.add(Dense(units=10, input_dim=11, activation='relu' ))
 
 model.add(Dense(units=10, activation='relu'))
 
-model.add(Dense(units=9, activation='relu'))
+model.add(Dense(units=8, activation='relu'))
 
 model.add(Dense(units=1, activation='sigmoid'))
 
