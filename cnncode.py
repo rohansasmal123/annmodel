@@ -36,12 +36,14 @@ model.add(Dense(units=1, activation='sigmoid'))
 
 model.compile(optimizer=Adam(learning_rate=0.0001), loss='binary_crossentropy', metrics=['accuracy'])
 
-model.fit(X_train, y_train, epochs=100)
+train_model = model.fit(X_train, y_train, epochs=30)
 
 y_pred = model.predict(X_test)
 
 text = train_model.history
 accuracy = text['accuracy'][-1] * 100
+model.save("model.h5")
+
 
 f = open('accuracy.txt','w')
 f.write("{0}".format(accuracy))
